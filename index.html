@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>교원대 텀페이퍼용 문제</title>
+		<style>
+			body {
+				margin: 30px;
+			}
+			* {
+				font-family: "Roboto", sans-serif;
+			}
+			p,
+			li {
+				font-size: 18px;
+			}
+
+			.container {
+				display: flex;
+				gap: 10px;
+			}
+
+			.hidden {
+				display: none;
+			}
+
+			.dropzone {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 40px;
+				border: 2px solid #ffffff;
+				background-color: #ededed;
+				border-radius: 10px;
+				transition: transform 0.5s;
+			}
+			.dropzone.dragover {
+				transform: scale(1.3);
+			}
+
+			/* Part 2 */
+			.box {
+				width: 100px;
+				height: 100px;
+				cursor: move;
+				user-select: none;
+			}
+			.box[data-item="number"] {
+				background-color: #ededed;
+				border-color: #ffffff;
+			}
+			.box[data-item="variable"] {
+				background-color: #ededed;
+				border-color: #ffffff;
+			}
+			.box[data-item="symbol"] {
+				background-color: #ffffff;
+				border-color: #ffffff;
+				font-size: 40px;
+			}
+			.box[data-item="equal"] {
+				background-color: #ffffff;
+				border-color: #ffffff;
+				font-size: 40px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Donovan Paper Ploblems</h1>
+		<button class="btn">다음 문제</button>
+		<!-- 문제 부분 -->
+		<div class="container">
+			<div draggable="true" class="dropzone box" data-item="number">
+				67
+			</div>
+			<div class="dropzone box" data-item="symbol">+</div>
+			<div draggable="true" class="dropzone box" data-item="number">
+				84
+			</div>
+			<div class="dropzone box equal" data-item="symbol">=</div>
+			<div draggable="true" class="dropzone box" data-item="variable">
+				__
+			</div>
+			<div class="dropzone box" data-item="symbol">+</div>
+			<div draggable="true" class="dropzone box" data-item="number">
+				83
+			</div>
+		</div>
+	</body>
+	<script src="script.js"></script>
+</html>
