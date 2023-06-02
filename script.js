@@ -4,6 +4,7 @@ var number1;
 var number2;
 var index1;
 var index2;
+var number2target;
 var i = 0;
 
 function handleDragStart(e) {
@@ -33,6 +34,7 @@ function handleDrop(e) {
 	if (e.stopPropagation) e.stopPropagation();
 	if (draggedElement != this) {
 		number2 = e.target.innerText;
+		//숫자 나누기
 		if (number2 > number1) {
 			const equal = document.querySelector(".equal");
 			equalIndex = [...e.target.parentNode.children].indexOf(equal);
@@ -49,6 +51,7 @@ function handleDrop(e) {
 				e.target.remove();
 			}
 		}
+		//숫자 바꾸기
 		if (
 			draggedElement != this &&
 			this.dataset.item != "symbol" &&
@@ -73,23 +76,10 @@ function handleDragEnd(e) {
 	});
 }
 
-//1초 간격 드래그엔드롭 방법 이벤트리스터 재로드
-setInterval(() => {
-	items = document.querySelectorAll(".container .box");
-	items.forEach(function (item) {
-		item.addEventListener("dragstart", handleDragStart);
-		item.addEventListener("dragenter", handleDragEnter);
-		item.addEventListener("dragover", handleDragOver);
-		item.addEventListener("dragleave", handleDragLeave);
-		item.addEventListener("drop", handleDrop);
-		item.addEventListener("dragend", handleDragEnd);
-	});
-}, 1000);
-
+//문제 바꾸기
 function onChangeProblem() {
 	const a = [
-		`<div class="container">
-		<div draggable="true" class="dropzone box" data-item="number">
+		`<div draggable="true" class="dropzone box" data-item="number">
 			67
 		</div>
 		<div class="dropzone box" data-item="symbol">+</div>
@@ -105,8 +95,7 @@ function onChangeProblem() {
 			83
 		</div>
 	</div>`,
-		`<div class="container">
-	<div draggable="true" class="dropzone box" data-item="variable">
+		`<div draggable="true" class="dropzone box" data-item="variable">
 		__
 	</div>
 	<div class="dropzone box" data-item="symbol">
@@ -115,7 +104,7 @@ function onChangeProblem() {
 	<div draggable="true" class="dropzone box" data-item="number">
 		55
 	</div>
-	<div class="dropzone box" data-item="symbol">
+	<div class="dropzone box equal" data-item="symbol">
 		=
 	</div>
 	<div draggable="true" class="dropzone box" data-item="number">
@@ -128,15 +117,14 @@ function onChangeProblem() {
 		54
 	</div>
 	</div>`,
-		`<div class="container">
-	<div draggable="true" class="dropzone box" data-item="number">
+		`<div draggable="true" class="dropzone box" data-item="number">
 		60
 	</div>
 	<div class="dropzone box" data-item="symbol">+</div>
 	<div draggable="true" class="dropzone box" data-item="variable">
 		__
 	</div>
-	<div class="dropzone box" data-item="symbol">=</div>
+	<div class="dropzone box equal" data-item="symbol">=</div>
 	<div draggable="true" class="dropzone box" data-item="number">
 		48
 	</div>
@@ -146,8 +134,7 @@ function onChangeProblem() {
 	</div>
 	</div>
 	`,
-		`<div class="container">
-	<div draggable="true" class="dropzone box" data-item="number">
+		`<div draggable="true" class="dropzone box" data-item="number">
 		18
 	</div>
 	<div class="dropzone box" data-item="symbol">+</div>
@@ -155,8 +142,8 @@ function onChangeProblem() {
 		31
 	</div>
 	<div class="dropzone box" data-item="symbol">+</div>
-	<div class="dropzone box" data-item="number">53</div>
-	<div class="dropzone box" data-item="symbol">=</div>
+	<div draggable="true" class="dropzone box" data-item="number">53</div>
+	<div class="dropzone box equal" data-item="symbol">=</div>
 	<div draggable="true" class="dropzone box" data-item="variables">
 		__
 	</div>
@@ -168,44 +155,48 @@ function onChangeProblem() {
 	];
 	const b = document.querySelector(".container");
 	b.innerHTML = a[i];
+	i < 3 ? (i += 1) : (i = 0);
 }
-onChangeProblem;
-/*
-//문제 바꾸기
-function onChangeProblem() {
-	const problems = [
-		`<div class="container hidden">
-			<div draggable="true" class="dropzone box" data-item="variable">
-				__
-			</div>
-			<div class="dropzone box" data-item="symbol">
-				+
-			</div>
-			<div draggable="true" class="dropzone box" data-item="number">
-				55
-			</div>
-			<div class="dropzone box" data-item="symbol">
-				=
-			</div>
-			<div draggable="true" class="dropzone box" data-item="number">
-				37
-			</div>
-			<div class="dropzone box" data-item="symbol">
-				+
-			</div>
-			<div draggable="true" class="dropzone box" data-item="number">
-				54
-			</div>
-		</div>`,
-		2,
-		3,
-	];
 
-	const container = document.querySelector(".container");
-	let chnum = 0;
-	container.innerHTML = problems[chnum];
-	chnum += 1;
-}
-const btn = querySelector(".btn");
+const btn = document.querySelector(".btn");
 btn.addEventListener("click", onChangeProblem);
-*/
+
+//더블클릭으로 분할
+const dialog = document.querySelector("dialog");
+
+function onDivide(e) {
+	number2target = e.target;
+	number2 = e.target.innerText;
+	dialog.showModal();
+}
+
+dialog.addEventListener("close", (e) => {
+	if (dialog.returnValue == "confirm") {
+		number1 = document.getElementById("dnum").value;
+		console.log(number1, number2);
+		divnumbers = `
+		<div draggable="true" class="dropzone box" data-item="number"> ${number1} </div>
+		<div draggable="true" class="dropzone box" data-item="symbol"> + </div>
+		<div draggable="true" class="dropzone box" data-item="number"> ${
+			number2 - number1
+		} </div>
+		`;
+		number2target.insertAdjacentHTML("beforebegin", divnumbers);
+		number2target.remove();
+	}
+});
+
+//1초 간격 드래그엔드롭 방법 이벤트리스터 재로드
+function onEvent() {
+	items = document.querySelectorAll(".container .box");
+	items.forEach(function (item) {
+		item.addEventListener("dragstart", handleDragStart);
+		item.addEventListener("dragenter", handleDragEnter);
+		item.addEventListener("dragover", handleDragOver);
+		item.addEventListener("dragleave", handleDragLeave);
+		item.addEventListener("drop", handleDrop);
+		item.addEventListener("dragend", handleDragEnd);
+		item.addEventListener("dblclick", onDivide);
+	});
+}
+setInterval(onEvent, 1000);
