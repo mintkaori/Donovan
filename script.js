@@ -197,6 +197,25 @@ function onEvent() {
 		item.addEventListener("drop", handleDrop);
 		item.addEventListener("dragend", handleDragEnd);
 		item.addEventListener("dblclick", onDivide);
+		item.addEventListener("click", onBorder);
 	});
 }
 setInterval(onEvent, 1000);
+
+//색깔창 추가, 클릭으로 색깔 변경
+const colorOptions = Array.from(
+	document.getElementsByClassName("color-option")
+);
+
+const color = document.getElementById("color");
+
+function onColorClick(e) {
+	const colorValue = e.target.dataset.color;
+	color.value = colorValue;
+}
+
+colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
+
+function onBorder(e) {
+	e.target.style.border = `3px solid ${color.value}`;
+}

@@ -31,8 +31,22 @@
 				gap: 10px;
 			}
 
-			.hidden {
-				display: none;
+			.color-options {
+				position: fixed;
+				bottom: 50px;
+				right: 50px;
+				display: flex;
+				flex-direction: row;
+				gap: 15px;
+			}
+
+			.color-option {
+				width: 50px;
+				height: 50px;
+				border-radius: 25px;
+				cursor: pointer;
+				border: 5px solid white;
+				transition: transform ease-in-out 0.1s;
 			}
 
 			.dropzone {
@@ -41,7 +55,7 @@
 				justify-content: center;
 				font-size: 40px;
 				border: 2px solid #ffffff;
-				background-color: #ededed;
+				background-color: #ffffff;
 				border-radius: 10px;
 				transition: transform 0.5s;
 			}
@@ -66,7 +80,7 @@
 			}
 			.box[data-item="symbol"] {
 				background-color: #ffffff;
-				border-color: #ffffff;
+				border: 3px solid #ffffff;
 				font-size: 40px;
 			}
 			.box[data-item="equal"] {
@@ -105,6 +119,29 @@
 				<button value="confirm">확인</button>
 			</form>
 		</dialog>
+		<div class="color-options">
+			<input type="color" id="color" />
+			<div
+				class="color-option"
+				style="background: #ba92ee"
+				data-color="#ba92ee"
+			></div>
+			<div
+				class="color-option"
+				style="background: #24eb7d"
+				data-color="#24eb7d"
+			></div>
+			<div
+				class="color-option"
+				style="background: #f1c40f"
+				data-color="#f1c40f"
+			></div>
+			<div
+				class="color-option"
+				style="background: #00000015"
+				data-color="#ffffff"
+			></div>
+		</div>
 	</body>
 	<script src="script.js"></script>
 </html>
