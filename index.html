@@ -26,6 +26,13 @@
 				background-color: rgba(0, 0, 0, 0.5);
 			}
 
+			canvas {
+				width: 800px;
+				height: 800px;
+				background-color: white;
+				border-radius: 10px;
+			}
+
 			.container {
 				display: flex;
 				gap: 10px;
@@ -111,6 +118,7 @@
 				83
 			</div>
 		</div>
+		<canvas id="canvas"></canvas>
 		<dialog>
 			나눌 수 :
 			<input type="number" id="dnum" />
@@ -141,6 +149,7 @@
 				style="background: #00000015"
 				data-color="#ffffff"
 			></div>
+			<button id="destroy-btn">낙서 지우기</button>
 		</div>
 	</body>
 	<script src="script.js"></script>

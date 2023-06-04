@@ -80,6 +80,54 @@ function handleDragEnd(e) {
 function onChangeProblem() {
 	const a = [
 		`<div draggable="true" class="dropzone box" data-item="number">
+			24
+		</div>
+		<div class="dropzone box" data-item="symbol">+</div>
+		<div draggable="true" class="dropzone box" data-item="number">
+			15
+		</div>
+		<div class="dropzone box equal" data-item="symbol">=</div>
+		<div draggable="true" class="dropzone box" data-item="number">
+			24
+		</div>
+		<div class="dropzone box" data-item="symbol">+</div>
+		<div draggable="true" class="dropzone box" data-item="variable">
+			__
+		</div>
+	</div>`,
+		`<div draggable="true" class="dropzone box" data-item="number">
+			47
+		</div>
+		<div class="dropzone box" data-item="symbol">+</div>
+		<div draggable="true" class="dropzone box" data-item="number">
+			26
+		</div>
+		<div class="dropzone box equal" data-item="symbol">=</div>
+		<div draggable="true" class="dropzone box" data-item="number">
+			44
+		</div>
+		<div class="dropzone box" data-item="symbol">+</div>
+		<div draggable="true" class="dropzone box" data-item="variable">
+			__
+		</div>
+	</div>`,
+		`<div draggable="true" class="dropzone box" data-item="number">
+			24
+		</div>
+		<div class="dropzone box" data-item="symbol">+</div>
+		<div draggable="true" class="dropzone box" data-item="variable">
+		__</div>
+		<div class="dropzone box equal" data-item="symbol">=</div>
+		<div draggable="true" class="dropzone box" data-item="number">
+			28
+		</div>
+		<div class="dropzone box" data-item="symbol">+</div>
+		<div draggable="true" class="dropzone box" data-item="number">
+			58
+		</div>
+		
+	</div>`,
+		`<div draggable="true" class="dropzone box" data-item="number">
 			67
 		</div>
 		<div class="dropzone box" data-item="symbol">+</div>
@@ -219,3 +267,44 @@ colorOptions.forEach((color) => color.addEventListener("click", onColorClick));
 function onBorder(e) {
 	e.target.style.border = `3px solid ${color.value}`;
 }
+
+//필기 기능
+const canvas = document.querySelector("canvas");
+const ctx = canvas.getContext("2d");
+const lineWidth = document.getElementById("line-width");
+const CANVAS_WIDTH = 800;
+const CANVAS_HEIGHT = 800;
+const destroyBtn = document.getElementById("destroy-btn");
+
+canvas.width = CANVAS_WIDTH;
+canvas.height = CANVAS_HEIGHT;
+
+let isPainting = false;
+let isFilling = false;
+
+function onMove(e) {
+	if (isPainting) {
+		ctx.lineTo(e.offsetX, e.offsetY);
+		ctx.stroke();
+		return;
+	}
+	ctx.beginPath();
+	ctx.moveTo(e.offsetX, e.offsetY);
+}
+
+function startPainting() {
+	isPainting = true;
+}
+
+function cancelPainting() {
+	isPainting = false;
+}
+function onDestroyClick() {
+	ctx.fillStyle = "white";
+	ctx.fillRect(0, 0, 800, 800);
+}
+
+canvas.addEventListener("mousemove", onMove);
+canvas.addEventListener("mousedown", startPainting);
+canvas.addEventListener("mouseup", cancelPainting);
+destroyBtn.addEventListener("click", onDestroyClick);
