@@ -80,7 +80,7 @@ function handleDragEnd(e) {
 function onChangeProblem() {
 	const a = [
 		`<div draggable="true" class="dropzone box" data-item="number">
-			24
+		24
 		</div>
 		<div class="dropzone box" data-item="symbol">+</div>
 		<div draggable="true" class="dropzone box" data-item="number">
@@ -94,9 +94,9 @@ function onChangeProblem() {
 		<div draggable="true" class="dropzone box" data-item="variable">
 			__
 		</div>
-	</div>`,
+		</div>`,
 		`<div draggable="true" class="dropzone box" data-item="number">
-			47
+		47
 		</div>
 		<div class="dropzone box" data-item="symbol">+</div>
 		<div draggable="true" class="dropzone box" data-item="number">
@@ -200,10 +200,57 @@ function onChangeProblem() {
 		63
 	</div>
 	</div>`,
+		`<div draggable="true" class="dropzone box" data-item="number">
+			24
+		</div>
+		<div class="dropzone box" data-item="symbol">+</div>
+		<div draggable="true" class="dropzone box" data-item="number">
+			15
+		</div>
+		<div class="dropzone box equal" data-item="symbol">=</div>
+		<div draggable="true" class="dropzone box" data-item="number">
+			24
+		</div>
+		<div class="dropzone box" data-item="symbol">+</div>
+		<div draggable="true" class="dropzone box" data-item="variable">
+			__
+		</div>
+	</div>`,
+		`<div draggable="true" class="dropzone box" data-item="number">
+			47
+		</div>
+		<div class="dropzone box" data-item="symbol">+</div>
+		<div draggable="true" class="dropzone box" data-item="number">
+			26
+		</div>
+		<div class="dropzone box equal" data-item="symbol">=</div>
+		<div draggable="true" class="dropzone box" data-item="number">
+			44
+		</div>
+		<div class="dropzone box" data-item="symbol">+</div>
+		<div draggable="true" class="dropzone box" data-item="variable">
+			__
+		</div>
+	</div>`,
+		`<div draggable="true" class="dropzone box" data-item="number">
+			24
+		</div>
+		<div class="dropzone box" data-item="symbol">+</div>
+		<div draggable="true" class="dropzone box" data-item="variable">
+		__</div>
+		<div class="dropzone box equal" data-item="symbol">=</div>
+		<div draggable="true" class="dropzone box" data-item="number">
+			28
+		</div>
+		<div class="dropzone box" data-item="symbol">+</div>
+		<div draggable="true" class="dropzone box" data-item="number">
+			58
+		</div>
+	</div>`,
 	];
 	const b = document.querySelector(".container");
 	b.innerHTML = a[i];
-	i < 3 ? (i += 1) : (i = 0);
+	i < 6 ? (i += 1) : (i = 0);
 }
 
 const btn = document.querySelector(".btn");
